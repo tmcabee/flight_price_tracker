@@ -3,7 +3,7 @@ require 'optparse'
 require_relative 'search_form'
 require_relative 'flight_info'
 
-options = {:orig => nil, :dest => nil, :depart_date => nil, :return_date => nil}
+options = {:orig => nil, :dest => nil, :depart_date => nil, :return_date => nil, :passengers => 1}
 
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: southwest.rb [options]"
@@ -23,6 +23,10 @@ parser = OptionParser.new do |opts|
   opts.on('--return_date n') do |date|
     options[:return_date] = date
   end
+
+  opts.on('--passengers n') do |passengers|
+    options[:passengers] = passengers
+  end
 end
 
 parser.parse!
@@ -32,7 +36,7 @@ flights = SearchForm.new(options).search
 if flights.empty?
   puts "No Flight Results :("
 else
-  puts "Your flight results from " + options[:orig] + " to " + options[:dest]
+  puts "Your flight results from #{options[:orig]} to #{options[:dest]} for #{options[:passengers]} passengers"
   flights.each do |flight|
     puts flight.to_s
   end

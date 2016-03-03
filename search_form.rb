@@ -23,6 +23,8 @@ class SearchForm
 		form.destinationAirport = @options[:dest]
 		form.outboundDateString = @options[:depart_date]
 		form.returnDateString = @options[:return_date]
+		form.adultPassengerCount = @options[:passengers]
+
 		page = form.submit
 
 		# Pick out the desired flights from the search results
