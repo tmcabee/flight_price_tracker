@@ -1,5 +1,8 @@
 class FlightInfo
 
+  DESIRED_FLIGHT_CODES = ['O', 'M', 'W', 'R'].freeze
+  MAX_STOPS = 0
+
   def self.create_from(data, title)
     info = new(data, title)
     info if info.desired?
@@ -20,7 +23,7 @@ class FlightInfo
   end
 
   def desired?
-    @raw_data.size < 20 and @type =~ /@[OMW]@/ and @number_of_stops == '0'
+    @raw_data.size < 20 and @type =~ /@[#{DESIRED_FLIGHT_CODES.join}]@/ and @number_of_stops.to_i <= MAX_STOPS
   end
 
   def to_s

@@ -27,8 +27,14 @@ class SearchForm
 
 		# Pick out the desired flights from the search results
 		results = page.form(SEARCH_RESULTS_ID)
+		flights_from results
+  end
+
+  private
+
+   def flights_from(results)
 		results.radiobuttons_with(:name => /boundTrip/).each_with_object([]) do |entry, memo|
 		  memo.push(FlightInfo.create_from(entry.value.split(','), entry.node.attributes['title']))
 		end.compact
-  end
+   end
 end

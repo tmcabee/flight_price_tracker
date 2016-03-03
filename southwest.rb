@@ -36,4 +36,5 @@ else
   flights.each do |flight|
     puts flight.to_s
   end
+  puts "="*80
 end
